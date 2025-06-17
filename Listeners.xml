@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel = "tests" name="Suite">
+
+
+<listeners>
+
+<listener class-name = "test.suit.Listeners"/>
+
+</listeners>
+
+  <test thread-count="5" name="SubmitOrder">
+    <classes>
+      <class name="test.SubmitOrder"/>
+      
+      
+    </classes>
+  </test> 
+  
+  <test thread-count="5" name="Errorvalidation">
+    <classes>
+      <class name="test.errorvalidation"/>
+      
+      
+    </classes>
+  </test> 
+  
+</suite> <!-- Suite -->
+
+
+
+
+<!-- to generate this xml file , on TestNg project , right click and click testng -> convert to testng -> next -> finish -->

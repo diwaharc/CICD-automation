@@ -1,0 +1,198 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>TestNG</groupId>
+  <artifactId>TestNG</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+     
+
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+    
+  <!-- below code was copied from maven testng integration from google -->
+    <!-- we copied only the <plugin>  section from there and pasted under <plugins> with  s in this pom file -->
+        <!-- whatever xml file needs to run is given under suitxmlfile tag   -->
+         <!-- this below code can we used only for calling one xml file , so we define a proper profile tags and id tags below in line 3 and dynamcally defining for all the 3 xml files --> 
+
+ <!-- line 1 -->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+       <!--Maven’s Surefire Plugin configuration to specify which test classes or files should be included when running tests--> 
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.3</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+   <!-- below code was copied from maven testng integration from google  -->
+ <!-- line 2 -->
+ 
+ 
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  
+   
+ <!-- line 3 --> 
+  <!-- Profiles with s tag is opened and closed within which we have defined profile tag and then id tag within it --> 
+    <!-- within id tag we have given common name related to the xml file we are placing --> 
+      <!-- after that we copy from line 1 and line 2 which i have given as notes above and paste it after id tags also we are closing </build> </plugins> tag which was extra while copying line 1 --> 
+        <!-- the above procedure is done 3 times to define 3 xml file --> 
+
+
+  <profiles>
+  
+   <!-- below lines are specifically for cucumber related  --> 
+    <!-- make sure specifying testrunner.java file between <includes> </includes> not like other xml files  and also use **/ after the file name inorder to scan that files in all the folders--> 
+  <profile>
+  
+  <id>cucumber</id>
+  <build>
+    <plugins>
+    
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.3</version>
+        <configuration>
+          <includes>
+            <include>**/testrunner.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+          </plugins>
+    </build>
+
+  
+  </profile>
+  
+  <profile>
+  
+  <id>fullTest</id>
+  <build>
+    <plugins>
+    
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.3</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+          </plugins>
+    </build>
+
+  
+  </profile>
+  
+  <profile>
+  
+  <id>hashmaps</id>
+  <build>
+    <plugins>
+    
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.3</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>hashmaps.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+          </plugins>
+    </build>
+
+  </profile>
+  
+  <profile>
+  
+  <id>errorvalidation</id>
+  <build>
+    <plugins>
+    
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.3</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>Listeners.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+          </plugins>
+    </build>
+  </profile>
+  </profiles>
+  
+  
+  <dependencies>
+ 
+  	
+  	<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.31.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+ 
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>7.10.1</version>
+    <scope>test</scope>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.19.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.23.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-testng</artifactId>
+    <version>7.23.0</version>
+</dependency>
+
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.11.0</version> <!-- or latest -->
+</dependency> 
+
+<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>5.1.2</version>
+</dependency>
+
+
+  </dependencies>
+</project>
