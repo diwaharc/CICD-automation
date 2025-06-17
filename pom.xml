@@ -156,7 +156,7 @@
     <groupId>org.testng</groupId>
     <artifactId>testng</artifactId>
     <version>7.10.1</version>
-    <scope>test</scope>
+    <scope>compile</scope>
 </dependency>
 
 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
